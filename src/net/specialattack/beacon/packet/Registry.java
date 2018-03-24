@@ -3,6 +3,7 @@ package net.specialattack.beacon.packet;
 import net.specialattack.beacon.ConnectionState;
 import net.specialattack.beacon.packet.client.ClientPacket;
 import net.specialattack.beacon.packet.client.handshaking.C0Handshake;
+import net.specialattack.beacon.packet.client.login.C0LoginStart;
 import net.specialattack.beacon.packet.client.status.C0Request;
 import net.specialattack.beacon.packet.client.status.C1Ping;
 
@@ -27,7 +28,7 @@ public class Registry {
         stateToPacketMap.put(ConnectionState.STATUS, statusPackets);
 
         Map<Integer, Class<? extends ClientPacket>> loginPackets = new HashMap<>();
-        //loginPackets.put(0, C0Handshake.class);
+        loginPackets.put(0, C0LoginStart.class);
         stateToPacketMap.put(ConnectionState.LOGIN, loginPackets);
     }
 

@@ -70,7 +70,6 @@ public class Motd {
     }
 
     public static String getMotd(int protocolVersion) {
-
         JsonObject element = new JsonObject();
         element.add("description", description);
         element.add("players", players);
@@ -87,5 +86,9 @@ public class Motd {
         }
 
         return gson.toJson(element);
+    }
+
+    public static String getDescription() {
+        return gson.toJson(description);
     }
 }

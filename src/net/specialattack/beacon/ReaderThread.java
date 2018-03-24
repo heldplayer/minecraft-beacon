@@ -17,14 +17,12 @@ public class ReaderThread implements Runnable {
 
     @Override
     public void run() {
-        System.out.printf("[%s] Running reader%n", this.client.getUuid());
-
         try (ExtendedInputStream input = this.client.getInput()) {
             while (this.client.connected()) {
                 int length = input.readVarInt();
                 int packetType = input.readVarInt();
 
-                System.out.printf("[%s] Got packet type 0x%H%n", this.client.getUuid(), packetType);
+                System.out.printf("[%s] Got packet with type 0x%H and length %d%n", this.client.getUuid(), packetType, length);
 
                 ClientPacket packet = Registry.getClientPacket(this.client.getState(), packetType);
 

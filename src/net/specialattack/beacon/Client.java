@@ -28,6 +28,8 @@ public class Client {
     public Client(Socket socket, String uuid, Runnable onClosed) throws IOException {
         this.uuid = uuid;
 
+        System.out.printf("[%s] Client connected%n", this.uuid);
+
         this.reader = new Thread(new ReaderThread(this), "Server Read Thread " + uuid);
         this.socket = socket;
         this.input = new ExtendedInputStream(this.socket.getInputStream());
@@ -115,7 +117,6 @@ public class Client {
     }
 
     public synchronized void sendPacket(ServerPacket packet) {
-        System.out.printf("[%s] Sending packet%n", this.uuid);
         try {
             ByteArrayOutputStream out = new ByteArrayOutputStream(256);
             ExtendedOutputStream wrapped = new ExtendedOutputStream(out);
@@ -128,7 +129,7 @@ public class Client {
             this.output.write(data);
             this.output.flush();
 
-            System.out.printf("[%s] Sent packet with id %H and length %d%n", this.uuid, packet.getTypeId(), data.length);
+            System.out.printf("[%s] Sent packet with type 0x%H and length %d%n", this.uuid, packet.getTypeId(), data.length);
         } catch (IOException e) {
             e.printStackTrace();
         }

@@ -48,12 +48,7 @@ public class Main {
 
                     String uuid = _uuid;
 
-                    System.out.printf("Adding client %s%n", uuid);
-
-                    Client client = new Client(clientSocket, uuid, () -> {
-                        System.out.printf("Removing client %s%n", uuid);
-                        clients.remove(uuid);
-                    });
+                    Client client = new Client(clientSocket, uuid, () -> clients.remove(uuid));
 
                     clients.put(uuid, client);
                 } catch (IOException e) {

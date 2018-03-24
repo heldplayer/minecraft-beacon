@@ -1,5 +1,6 @@
 package net.specialattack.beacon.io;
 
+import java.io.BufferedInputStream;
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -7,7 +8,7 @@ import java.nio.charset.Charset;
 
 public class ExtendedInputStream extends DataInputStream {
     public ExtendedInputStream(InputStream stream) throws IOException {
-        super(stream);
+        super(new BufferedInputStream(stream));
     }
 
     public String readString(int max) throws IOException {
